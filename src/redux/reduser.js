@@ -4,92 +4,10 @@ const initState = {
         taskText: "Lorem ipsum dolor sit amet, consetetur",
         taskInput: "Параметры ввода"
     },
-    taskList: [
-        {
-            id: 1,
-            taskName: "Задача 1",
-            taskTheme: "Тема 1",
-            taskText: 'Текст ебаной задачи',
-            taskInput: [
-                {
-                    name: 'rrrrr',
-                    type: 'type_r'
-                },
-                {
-                    name: '',
-                    type: ''
-                },
-                {
-                    name: '',
-                    type: ''
-                }
-            ],
-            codeExample: 'import react from "react";',
-        },
-        {
-            id: 2,
-            taskName: "Задача 2",
-            taskTheme: "Тема 2",
-            taskText: 'Текст ебаной задачи',
-            taskInput: [
-                {
-                    name: 'rrrrr',
-                    type: 'type_r'
-                },
-                {
-                    name: '',
-                    type: ''
-                },
-                {
-                    name: '',
-                    type: ''
-                }
-            ],
-            codeExample: 'import react from "react";',
-        },
-        {
-            id: 3,
-            taskName: "Задача 3",
-            taskTheme: "Тема 3",
-            taskText: 'Текст ебаной задачи',
-            taskInput: [
-                {
-                    name: 'rrrrr',
-                    type: 'type_r'
-                },
-                {
-                    name: '',
-                    type: ''
-                },
-                {
-                    name: '',
-                    type: ''
-                }
-            ],
-            codeExample: 'import react from "react";',
-        },
-        {
-            id: 4,
-            taskName: "Задача 4",
-            taskTheme: "Тема 4",
-            taskText: 'Текст ебаной задачи',
-            taskInput: [
-                {
-                    name: 'rrrrr',
-                    type: 'type_r'
-                },
-                {
-                    name: '',
-                    type: ''
-                },
-                {
-                    name: '',
-                    type: ''
-                }
-            ],
-            codeExample: 'import react from "react";',
-        }
-    ]
+    taskList: [],
+    solutions: [],
+    testCases: [],
+    individualTasksURL: '',
 }
 
 export const reducer = (state = initState, action) => {
@@ -105,10 +23,49 @@ export const reducer = (state = initState, action) => {
             }
 
         case "GET_ALL_TASKS_SUCCESS" :
+            console.log("action", action)
             return {
                 ...state,
-                taskList: action.taskList,
+                taskList: action.taskList.tasks,
             }
+        case "GET_TASK" :
+            console.log("action", action)
+            return {
+                ...state,
+                task: action.task,
+            }
+        case "SAVE_ALL_TEST_CASES" :
+            console.log("action", action)
+            return {
+                ...state,
+                testCases: action.testCases,
+            }
+        case "SAVE_TASKS_SUCCESS" :
+            return {
+                ...state,
+                task: action.task,
+            }
+
+        case "GET_ALL_SOLUTIONS" :
+            console.log("action", action)
+            return {
+                ...state,
+                task: action.solutions,
+            }
+
+        case 'DOWNLOAD_INDIVIDUAL_TASKS': {
+            return {
+                ...state,
+                individualTasksURL: action.url
+            }
+        }
+
+        case 'SEND_SOLUTION': {
+            return {
+                ...state,
+                individualTasksURL: action.url
+            }
+        }
 
         default:
             return state;
